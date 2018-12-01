@@ -15,9 +15,7 @@ then by moving the `mfetch` program to your `/usr/bin` directory. Alternatively 
 
 After that just restart bash by typing into your terminal:
 
-```
-$ bash
-```
+`$ bash`
 
 or by just restarting your terminal emulator.
 
@@ -25,9 +23,7 @@ or by just restarting your terminal emulator.
 
 In your terminal type:
 
-```
-$ mfetch
-```
+`$ mfetch`
 
 # Dependencies
 
