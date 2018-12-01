@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# mfetch -  a minimalist fetch
+
+OS=$(cat /etc/issue | head -n +1 | cut -d '\' -f 1)
+KERNEL=$(uname -r | cut -d - -f1)
+UP=$(uptime -p | sed 's/up //')
+SH=$(basename ${SHELL})
+
+# colours
+if [ -x "$(command -v tput)" ]; then
+	bold="$(tput bold)"
+	black="$(tput setaf 0)"
+	red="$(tput setaf 1)"
+	green="$(tput setaf 2)"
+	yellow="$(tput setaf 3)"
+	blue="$(tput setaf 4)"
+	magenta="$(tput setaf 5)"
+	cyan="$(tput setaf 6)"
+	white="$(tput setaf 7)"
+	reset="$(tput sgr0)"
+fi
+
+function spec() {
+echo
+xdef="$HOME/.Xresources"
+
+colors=( $( sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' $xdef | grep 'color[01][0-9]:' | sort | sed  's/^.*: *//g' ) 
+)
+
+echo
+for i in {0..7}; do echo -en "\e[$((30+$i))m ${colors[i]} \u2588\u2588 \e[0m"; done
+echo
+for i in {8..15}; do echo -en "\e[1;$((22+$i))m ${colors[i]} \u2588\u2588 \e[0m"; done
+echo -e "\n"
+}
+
+function main() {
+	echo "$blue os: $white$OS"
+	echo "$blue kr: $white$KERNEL"
+	echo "$blue up: $white$UP"
+	echo "$blue sh: $white$SH"
+}
+
+main
+#spec
