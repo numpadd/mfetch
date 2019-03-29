@@ -2,30 +2,16 @@
 
 # mfetch -  a minimalist fetch
 
-OS=$(cat /etc/issue | head -n +1 | cut -d '\' -f 1)
-KERNEL=$(uname -r | cut -d - -f1)
-UP=$(uptime -p | sed 's/up //')
-SH=$(basename ${SHELL})
+me=$(whoami)
+os=$(cat /etc/*-release | sed -n 1p | sed 's/NAME="//g;s/"$//g;s/\(.*\)/\L\1/')
+kr=$(uname -r | cut -d - -f1)
+up=$(uptime -p | sed 's/up //')
+sh=$(basename ${SHELL})
+mem=$(free -h | awk '/Mem:/ {print $3 "/" $2}')
 
-# colours
-if [ -x "$(command -v tput)" ]; then
-	bold="$(tput bold)"
-	black="$(tput setaf 0)"
-	red="$(tput setaf 1)"
-	green="$(tput setaf 2)"
-	yellow="$(tput setaf 3)"
-	blue="$(tput setaf 4)"
-	magenta="$(tput setaf 5)"
-	cyan="$(tput setaf 6)"
-	white="$(tput setaf 7)"
-	reset="$(tput sgr0)"
-fi
-
-function main() {
-	echo "$blue os: $white$OS"
-	echo "$blue kr: $white$KERNEL"
-	echo "$blue up: $white$UP"
-	echo "$blue sh: $white$SH"
-}
-
-main
+echo -e "\e[34m me: \e[0m$me"
+echo -e "\e[34m os: \e[0m$os"
+echo -e "\e[34m kr: \e[0m$kr"
+echo -e "\e[34m up: \e[0m$up"
+echo -e "\e[34m sh: \e[0m$sh"
+echo -e "\e[34m mem: \e[0m$mem"
