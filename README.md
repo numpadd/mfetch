@@ -1,7 +1,7 @@
 <h1 align="center">mfetch</h1>
 <p align="center">A minimalist fetch written in bash.</p>
 <br>
-<h3><em>note: this isn't meant to be a replacement for the already amazing [neofetch](https://github.com/dylanaraps/neofetch) I just made this for fun</em></h3>
+<h3><em>note: this isn't meant to be a replacement for the already amazing <a href="https://github.com/dylanaraps/neofetch">neofetch</a> I just made this for fun</em></h3>
 ---
 
 # Installation
