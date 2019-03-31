@@ -3,7 +3,7 @@
 # mfetch -  a minimalist fetch
 
 me=$(whoami)
-os=$(cat /etc/*-release | sed -n 1p | sed 's/NAME="//g;s/"$//g;s/\(.*\)/\L\1/')
+os=$(source /etc/os-release; echo $NAME)
 kr=$(uname -r | cut -d - -f1)
 up=$(uptime -p | sed 's/up //')
 sh=$(basename ${SHELL})
