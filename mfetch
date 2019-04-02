@@ -15,3 +15,5 @@ echo -e "\e[34m kr: \e[0m$kr"
 echo -e "\e[34m up: \e[0m$up"
 echo -e "\e[34m sh: \e[0m$sh"
 echo -e "\e[34m mem: \e[0m$mem"
+echo -e \\n \\e[10{0..7}m\ \ \\e[m \\n \\e[4{0..7}m\ \ \\e[m \\n
+# ^^^ https://github.com/dylanaraps/bin/blob/master/16
