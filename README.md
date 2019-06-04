@@ -2,6 +2,7 @@
 <p align="center">A minimalist fetch written in bash.</p>
 <br>
 <h5><em>Note: this isn't meant to be a replacement for the already amazing <a href="https://github.com/dylanaraps/neofetch">neofetch</a> I just made this for fun</em></h5>
+
 ---
 
 # Installation
