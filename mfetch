@@ -1,29 +1,34 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# minimal fetch/my fetch
 
-# mfetch -  a minimalist fetch to get what you want when you need it
-
-me=$(whoami)
-host=$(cat /etc/hostname)
-os=$(source /etc/os-release; echo $NAME)
+de=$(pgrep -l ".*-session" | awk '{print $2}' | sed 's/-session//g')
+host=$(< /etc/hostname)
 kr=$(uname -r | sed 's/-.*//g')
-up=$(uptime -p | sed 's/up //g;s/ days,/d/g;s/ hours,/h/g;s/ minutes/m/g;s/ day,/d/g;s/ hour,/h/g;s/ minute/m/g')
-de=$(echo "${XDG_CURRENT_DESKTOP}")
-wm=$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') | awk '/WM_NAME/ {print $3}' | sed 's/\"//g')
-sh=$(basename ${SHELL})
-term=$(echo $TERMINAL)
+me=$(whoami)
+mu=$(playerctl --player=spotify metadata --format '{{xesam:title}} ({{xesam:artist}})' 2>/dev/null)
+now=$(date +'%Y-%m-%d %H:%M:%S')
+os=$(source /etc/os-release; echo "${NAME}")
+pkg=$(pacman -Q 2>/dev/null | wc -l) # arch only
+root=$(df -h | awk '/\/$/ {print $3 "/" $2 " (" $5 ")"}')
+sh=$(basename "${SHELL}")
+term="${TERMINAL}"
+up=$(datediff "$(uptime -s)" "$now" -f "%dd %Hh %Mm")
+wm=$(wmctrl -m | awk '/Name/ { print $2 }')
 
-[[ -z $de ]] && de="none"
+[[ -z "${mu}" ]] && mu="none"
+[[ -z "${pkg}" ]] && pkg="none"
 
-echo -e "
-\e[34m me: \e[0m${me}
-\e[34m hs: \e[0m${host}
-\e[34m os: \e[0m${os}
-\e[34m kr: \e[0m${kr}
-\e[34m up: \e[0m${up}
-\e[34m de: \e[0m${de}
-\e[34m wm: \e[0m${wm}
-\e[34m sh: \e[0m${sh}
-\e[34m tr: \e[0m${term}"
-echo -e \\n \\e[10{0..7}m\ \ \\e[m \\n \\e[4{0..7}m\ \ \\e[m \\n
-
-# ^^^ https://github.com/dylanaraps/bin/blob/master/16
+printf "
+\e[34m me \e[0m%s
+\e[34m hs \e[0m%s
+\e[34m os \e[0m%s
+\e[34m pk \e[0m%s
+\e[34m kr \e[0m%s
+\e[34m up \e[0m%s
+\e[34m de \e[0m%s
+\e[34m wm \e[0m%s
+\e[34m sh \e[0m%s
+\e[34m te \e[0m%s
+\e[34m mu \e[0m%s
+\e[34m /  \e[0m%s\n\n" \
+"${me}" "${host}" "${os}" "${pkg}" "${kr}" "${up}" "${de}" "${wm}"  "${sh}" "${term}" "${mu}" "${root}" | tr '[:upper:]' '[:lower:]'

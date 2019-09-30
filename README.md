@@ -1,7 +1,6 @@
-<h1 align="center">mfetch</h1>
-<p align="center">A minimalist fetch written in bash.</p>
+<h1>mfetch</h1>
+A minimalist fetch written in bash.
 <br>
-<h5><em>Note: this isn't meant to be a replacement for the already amazing <a href="https://github.com/dylanaraps/neofetch">neofetch</a> I just made this for fun</em></h5>
 
 ---
 
@@ -9,17 +8,11 @@
 
 To install `mfetch` clone the repo by doing:
 
-`$ git clone https://github.com/numpadd/mfetch/` 
+`$ git clone https://github.com/numpadd/mfetch/`
 
-then by moving the `mfetch` program to your `/usr/bin` directory. Alternatively you can also symlink the program by doing:
+then run:
 
-`$ sudo ln -s ~/path/to/mfetch /usr/bin/mfetch`
-
-After that just restart bash by typing into your terminal:
-
-`$ bash`
-
-or by just restarting your terminal emulator.
+`$ sudo make install`
 
 # Usage
 
@@ -30,4 +23,7 @@ In your terminal type:
 # Dependencies
 
 * `bash`
-* `base` and `base-devel`
+* `coreutils`
+* `playerctl` - for spotify support
+* `dateutils`
+* `wmctrl`
